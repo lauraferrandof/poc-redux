@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-// import AddToDoForm from "../features/toDos/AddToDoForm";
+import AddToDoForm from '../features/toDos/AddToDoForm';
 import ToDosList from '../features/toDos/ToDosList';
 
 import { useStore } from '../app/store';
@@ -24,7 +24,7 @@ export default function Dashboard() {
 
   return (
     <>
-      {/* <AddToDoForm /> */}
+      <AddToDoForm />
       <section>
         <h2>All my to-dos</h2>
         {toDosStatus === 'loading' ? (

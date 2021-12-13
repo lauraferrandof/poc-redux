@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { nanoid } from '@reduxjs/toolkit';
 
-import { addToDo } from './toDosSlice';
+import { useStore } from '../../app/store';
+import { selectAddToDo } from './toDosSlice';
 
 export default function AddToDoForm() {
   const [toDo, setToDo] = useState('');
-  const dispatch = useDispatch();
+
+  const addToDo = useStore(selectAddToDo);
 
   const handleToDoChange = (e) => setToDo(e.target.value);
 
   const handleAddToDo = (e) => {
     e.preventDefault();
     if (toDo) {
-      dispatch(addToDo({ id: nanoid(), isCompleted: false, text: toDo }));
+      addToDo({ id: nanoid(), isCompleted: false, text: toDo });
       setToDo('');
     }
   };

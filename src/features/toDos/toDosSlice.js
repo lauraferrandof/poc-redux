@@ -51,6 +51,10 @@ export const createToDosSlice = (set) => ({
     set({ toDos: data });
     set({ status: 'succeeded' });
   },
+  addToDo: (toDo) =>
+    set((state) => ({
+      toDos: [...state.toDos, toDo],
+    })),
 });
 
 export const selectAllToDos = (state) => state.toDos;
@@ -58,5 +62,7 @@ export const selectAllToDos = (state) => state.toDos;
 export const selectStatus = (state) => state.status;
 
 export const selectGetToDos = (state) => state.getToDos;
+
+export const selectAddToDo = (state) => state.addToDo;
 
 export default createToDosSlice;
