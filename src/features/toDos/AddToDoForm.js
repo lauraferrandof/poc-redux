@@ -10,7 +10,8 @@ export default function AddToDoForm() {
 
   const handleToDoChange = (e) => setToDo(e.target.value);
 
-  const handleAddToDo = () => {
+  const handleAddToDo = (e) => {
+    e.preventDefault();
     if (toDo) {
       dispatch(addToDo({ id: nanoid(), text: toDo }));
       setToDo('');
@@ -29,7 +30,7 @@ export default function AddToDoForm() {
           type="text"
           value={toDo}
         />
-        <button onClick={handleAddToDo} type="button">
+        <button onClick={(e) => handleAddToDo(e)} type="submit">
           Add
         </button>
       </form>
