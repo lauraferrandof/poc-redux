@@ -55,6 +55,16 @@ export const createToDosSlice = (set) => ({
     set((state) => ({
       toDos: [...state.toDos, toDo],
     })),
+  toggleToDo: (todoId) =>
+    set((state) => ({
+      toDos: [
+        ...state.toDos.map((toDo) =>
+          toDo.id === todoId
+            ? { ...toDo, isCompleted: !toDo.isCompleted }
+            : toDo
+        ),
+      ],
+    })),
 });
 
 export const selectAllToDos = (state) => state.toDos;
@@ -64,5 +74,7 @@ export const selectStatus = (state) => state.status;
 export const selectGetToDos = (state) => state.getToDos;
 
 export const selectAddToDo = (state) => state.addToDo;
+
+export const selectToggleToDo = (state) => state.toggleToDo;
 
 export default createToDosSlice;

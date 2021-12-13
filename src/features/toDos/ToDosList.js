@@ -1,9 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { useStore } from '../../app/store';
+import { selectToggleToDo } from './toDosSlice';
+
 export default function ToDosList({ toDos }) {
+  const toggleToDo = useStore(selectToggleToDo);
+
   const handleToggleToDo = (id) => {
-    console.log(id);
+    toggleToDo(id);
   };
 
   return (
