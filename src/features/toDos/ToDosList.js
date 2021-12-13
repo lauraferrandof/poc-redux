@@ -7,10 +7,13 @@ export default function ToDosList() {
   const toDos = useSelector(selectToDos);
 
   return (
-    <ul>
-      {toDos.map((toDo) => (
-        <li key={toDo.id}>{toDo.text}</li>
-      ))}
-    </ul>
+    <section>
+      <h2>All my to-dos</h2>
+      <ul>
+        {toDos.map((toDo) => (
+          <li key={toDo.id}>{toDo.text}</li>
+        ))}
+      </ul>
+    </section>
   );
 }

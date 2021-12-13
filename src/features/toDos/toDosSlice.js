@@ -8,8 +8,14 @@ const initialState = [
 export const toDosSlice = createSlice({
   name: 'toDos',
   initialState,
-  reducers: {},
+  reducers: {
+    addToDo(state, action) {
+      state.push(action.payload);
+    },
+  },
 });
+
+export const { addToDo } = toDosSlice.actions;
 
 export const selectToDos = (state) => state.toDos;
 
