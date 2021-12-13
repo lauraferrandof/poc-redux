@@ -1,14 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
-
-import { toggleToDo } from './toDosSlice';
 
 export default function ToDosList({ toDos }) {
-  const dispatch = useDispatch();
-
   const handleToggleToDo = (id) => {
-    dispatch(toggleToDo(id));
+    console.log(id);
   };
 
   return (

@@ -39,9 +39,24 @@ export const toDosSlice = createSlice({
 
 export const { addToDo, toggleToDo } = toDosSlice.actions;
 
-export const selectAllToDos = (state) => state.toDos.items;
-
 export const selectToDosByCompletion = (state, completed) =>
   state.toDos.items.filter((item) => item.isCompleted === completed);
 
-export default toDosSlice.reducer;
+export const createToDosSlice = (set) => ({
+  toDos: [],
+  status: 'idle',
+  getToDos: async () => {
+    set({ status: 'loading' });
+    const { data } = await fetchToDos();
+    set({ toDos: data });
+    set({ status: 'succeeded' });
+  },
+});
+
+export const selectAllToDos = (state) => state.toDos;
+
+export const selectStatus = (state) => state.status;
+
+export const selectGetToDos = (state) => state.getToDos;
+
+export default createToDosSlice;

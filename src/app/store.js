@@ -1,9 +1,7 @@
-import { configureStore } from '@reduxjs/toolkit';
+import create from 'zustand';
 
-import toDosReducer from '../features/toDos/toDosSlice';
+import createToDosSlice from '../features/toDos/toDosSlice';
 
-export const store = configureStore({
-  reducer: {
-    toDos: toDosReducer,
-  },
-});
+export const useStore = create((set) => ({
+  ...createToDosSlice(set),
+}));
