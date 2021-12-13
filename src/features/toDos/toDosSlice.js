@@ -27,7 +27,7 @@ export const toDosSlice = createSlice({
   },
   extraReducers(builder) {
     builder
-      .addCase(getTodos.pending, (state, action) => {
+      .addCase(getTodos.pending, (state) => {
         state.status = 'loading';
       })
       .addCase(getTodos.fulfilled, (state, action) => {
@@ -39,6 +39,9 @@ export const toDosSlice = createSlice({
 
 export const { addToDo, toggleToDo } = toDosSlice.actions;
 
-export const selectToDos = (state) => state.toDos.items;
+export const selectAllToDos = (state) => state.toDos.items;
+
+export const selectToDosByCompletion = (state, completed) =>
+  state.toDos.items.filter((item) => item.isCompleted === completed);
 
 export default toDosSlice.reducer;
