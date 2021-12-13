@@ -39,9 +39,6 @@ export const toDosSlice = createSlice({
 
 export const { addToDo, toggleToDo } = toDosSlice.actions;
 
-export const selectToDosByCompletion = (state, completed) =>
-  state.toDos.items.filter((item) => item.isCompleted === completed);
-
 export const createToDosSlice = (set) => ({
   toDos: [],
   status: 'idle',
@@ -68,6 +65,9 @@ export const createToDosSlice = (set) => ({
 });
 
 export const selectAllToDos = (state) => state.toDos;
+
+export const selectToDosByCompletion = (state, completed) =>
+  state.toDos.filter((item) => item.isCompleted === completed);
 
 export const selectStatus = (state) => state.status;
 

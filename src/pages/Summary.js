@@ -1,14 +1,14 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 
+import { useStore } from '../app/store';
 import ToDosList from '../features/toDos/ToDosList';
 import { selectToDosByCompletion } from '../features/toDos/toDosSlice';
 
 export default function Summary() {
-  const completedToDos = useSelector((state) =>
+  const completedToDos = useStore((state) =>
     selectToDosByCompletion(state, true)
   );
-  const incompletedToDos = useSelector((state) =>
+  const incompletedToDos = useStore((state) =>
     selectToDosByCompletion(state, false)
   );
 
