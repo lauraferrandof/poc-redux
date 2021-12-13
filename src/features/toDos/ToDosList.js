@@ -36,7 +36,7 @@ export default function ToDosList({ toDos }) {
 ToDosList.propTypes = {
   toDos: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number,
+      id: PropTypes.string,
       isCompleted: PropTypes.bool,
       text: PropTypes.string,
     })
