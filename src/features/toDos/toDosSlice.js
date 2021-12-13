@@ -1,3 +1,5 @@
+import produce from 'immer';
+
 import { fetchToDos } from './toDosAPI';
 
 export const createToDosSlice = (set) => ({
@@ -10,19 +12,19 @@ export const createToDosSlice = (set) => ({
     set({ status: 'succeeded' });
   },
   addToDo: (toDo) =>
-    set((state) => ({
-      toDos: [...state.toDos, toDo],
-    })),
-  toggleToDo: (todoId) =>
-    set((state) => ({
-      toDos: [
-        ...state.toDos.map((toDo) =>
-          toDo.id === todoId
-            ? { ...toDo, isCompleted: !toDo.isCompleted }
-            : toDo
-        ),
-      ],
-    })),
+    set(
+      produce((state) => {
+        state.toDos.push(toDo);
+      })
+    ),
+  toggleToDo: (toDoId) =>
+    set(
+      produce((state) => {
+        state.toDos.map((toDo) =>
+          toDo.id === toDoId ? (toDo.isCompleted = !toDo.isCompleted) : toDo
+        );
+      })
+    ),
 });
 
 export const selectAllToDos = (state) => state.toDos;
