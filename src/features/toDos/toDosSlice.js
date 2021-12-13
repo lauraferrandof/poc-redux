@@ -1,27 +1,44 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-const initialState = [
-  { id: 1, isCompleted: false, text: 'Workpath onboarding' },
-  { id: 2, isCompleted: false, text: 'Finish to-do app' },
-];
+import { fetchToDos } from './toDosAPI';
+
+const initialState = {
+  items: [],
+  status: 'idle',
+};
+
+export const getTodos = createAsyncThunk('toDos/getToDos', async () => {
+  const { data } = await fetchToDos();
+  return data;
+});
 
 export const toDosSlice = createSlice({
   name: 'toDos',
   initialState,
   reducers: {
     addToDo(state, action) {
-      state.push(action.payload);
+      state.items.push(action.payload);
     },
     toggleToDo(state, action) {
       const toDoId = action.payload;
-      const modifiedToDo = state.find((toDo) => toDo.id === toDoId);
+      const modifiedToDo = state.items.find((toDo) => toDo.id === toDoId);
       modifiedToDo.isCompleted = !modifiedToDo.isCompleted;
     },
+  },
+  extraReducers(builder) {
+    builder
+      .addCase(getTodos.pending, (state, action) => {
+        state.status = 'loading';
+      })
+      .addCase(getTodos.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.items = state.items.concat(action.payload);
+      });
   },
 });
 
 export const { addToDo, toggleToDo } = toDosSlice.actions;
 
-export const selectToDos = (state) => state.toDos;
+export const selectToDos = (state) => state.toDos.items;
 
 export default toDosSlice.reducer;
