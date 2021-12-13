@@ -13,7 +13,7 @@ export default function AddToDoForm() {
   const handleAddToDo = (e) => {
     e.preventDefault();
     if (toDo) {
-      dispatch(addToDo({ id: nanoid(), text: toDo }));
+      dispatch(addToDo({ id: nanoid(), isCompleted: false, text: toDo }));
       setToDo('');
     }
   };
